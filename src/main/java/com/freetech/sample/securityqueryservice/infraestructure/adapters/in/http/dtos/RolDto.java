@@ -7,9 +7,8 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Setter
-public class UserDto {
+public class RolDto {
     private Long id;
-    private EntityDto entity;
-    private String username;
-    private String status;
+    private String name;
+    private String description;
 }

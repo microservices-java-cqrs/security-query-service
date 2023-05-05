@@ -1,6 +1,7 @@
 package com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.controllers;
 
-import com.freetech.sample.securityqueryservice.application.queries.GetAllEntityTypeQuery;
+import com.freetech.sample.securityqueryservice.domain.filters.EntityTypeFilter;
+import com.freetech.sample.securityqueryservice.domain.filters.GetAllEntityTypeQuery;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.dtos.EntityTypeDto;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.mappers.EntityTypeMapper;
 import com.freetech.sample.securityqueryservice.infraestructure.ports.in.QueryEntityTypePort;
@@ -19,19 +20,21 @@ public class QueryEntityTypeController {
     private final QueryEntityTypePort queryEntityTypePort;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<EntityTypeDto> getEntityType(@PathVariable("id") Integer id) {
+    public ResponseEntity<EntityTypeDto> getEntityType(@PathVariable("id") Long id) {
         return new ResponseEntity<>(EntityTypeMapper.toDto(queryEntityTypePort.getById(id), EntityTypeDto.class), HttpStatus.OK);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<ResultQuery<EntityTypeDto>> getAll(
+            @RequestParam(required = false) Long id,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer pageNumber,
             @RequestParam(required = false) Integer pageSize) {
-        var getAllEntityTypeQuery = new GetAllEntityTypeQuery();
-        getAllEntityTypeQuery.setName(name);
-        getAllEntityTypeQuery.setPageNumber(pageNumber);
-        getAllEntityTypeQuery.setPageSize(pageSize);
-        return new ResponseEntity<>(EntityTypeMapper.toDto(queryEntityTypePort.getAll(getAllEntityTypeQuery), EntityTypeDto.class), HttpStatus.OK);
+        var entityTypeFilter = new EntityTypeFilter();
+        entityTypeFilter.setId(id);
+        entityTypeFilter.setName(name);
+        entityTypeFilter.setPageNumber(pageNumber);
+        entityTypeFilter.setPageSize(pageSize);
+        return new ResponseEntity<>(EntityTypeMapper.toDto(queryEntityTypePort.getAll(entityTypeFilter), EntityTypeDto.class), HttpStatus.OK);
     }
 }

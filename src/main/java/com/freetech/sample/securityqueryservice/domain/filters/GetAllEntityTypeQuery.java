@@ -1,4 +1,4 @@
-package com.freetech.sample.securityqueryservice.application.queries;
+package com.freetech.sample.securityqueryservice.domain.filters;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

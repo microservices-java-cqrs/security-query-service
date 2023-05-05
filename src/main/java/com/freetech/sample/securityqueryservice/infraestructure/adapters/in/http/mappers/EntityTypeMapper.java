@@ -1,9 +1,7 @@
 package com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.mappers;
 
-import com.freetech.sample.securityqueryservice.domain.EntityType;
-import com.freetech.sample.securityqueryservice.domain.User;
+import com.freetech.sample.securityqueryservice.domain.model.EntityType;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.dtos.EntityTypeDto;
-import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.dtos.UserDto;
 import pagination.ResultQuery;
 
 import java.util.function.Function;
@@ -28,8 +26,10 @@ public class EntityTypeMapper {
             try {
                 var dto = clazz.getDeclaredConstructor().newInstance();
                 if (dto instanceof EntityTypeDto) {
-                    ((EntityTypeDto) dto).setId(entityType.getId());
-                    ((EntityTypeDto) dto).setName(entityType.getName());
+                    var objDto = ((EntityTypeDto) dto);
+                    objDto.setId(entityType.getId());
+                    objDto.setName(entityType.getName());
+                    objDto.setDescription(entityType.getDescription());
                 }
 
                 return dto;

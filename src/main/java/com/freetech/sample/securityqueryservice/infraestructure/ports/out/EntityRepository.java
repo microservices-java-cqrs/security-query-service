@@ -1,5 +1,7 @@
 package com.freetech.sample.securityqueryservice.infraestructure.ports.out;
 
+import org.springframework.data.mongodb.core.query.Query;
+
 import java.util.List;
 
 public interface EntityRepository {
@@ -7,7 +9,12 @@ public interface EntityRepository {
 
     <T> T update(String tableName, T entity);
 
-    <T> List<T> getByQuery(String sql, Object[] parameters, Class<T> clazz);
+    <K, T> T getById(K id, Class<T> clazz);
 
-    Integer countByQuery(String sql, Object[] parameters);
+    <T> List<T> getByQuery(Query query, Class<T> clazz);
+
+    <T> Long countByQuery(Query query, Class<T> clazz);
+
+    <T> List<T> getByQuery(String strQuery, Class<T> clazz);
+    Integer countByQuery(String strQuery);
 }

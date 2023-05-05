@@ -1,10 +1,11 @@
 package com.freetech.sample.securityqueryservice.infraestructure.ports.in;
 
-import com.freetech.sample.securityqueryservice.application.queries.GetAllUserQuery;
-import com.freetech.sample.securityqueryservice.domain.User;
+import com.freetech.sample.securityqueryservice.domain.filters.UserFilter;
+import com.freetech.sample.securityqueryservice.domain.model.User;
 import pagination.ResultQuery;
 
 public interface QueryUserPort {
-    User getById(Integer id);
-    ResultQuery<User> getAll(GetAllUserQuery getAllUserQuery);
+    User getById(Long id);
+    ResultQuery<User> getAll(UserFilter userFilter);
+    User getByIdWithRoles(Long id);
 }

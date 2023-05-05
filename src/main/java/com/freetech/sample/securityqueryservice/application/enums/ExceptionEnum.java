@@ -10,9 +10,12 @@ public enum ExceptionEnum {
 
     ERROR_GET_BY_ID_USER("50120", "Error getting user by id"),
     ERROR_GET_ALL_USER("50121", "Error getting users"),
+    ERROR_GET_BY_ID_USER_WITH_ROLES("50122", "Error getting user by id with roles"),
+    ERROR_NOT_FOUND_USER("50122", "User not found"),
 
     ERROR_GET_BY_ID_ENTITY_TYPE("50140", "Error getting entity type by id"),
     ERROR_GET_ALL_ENTITY_TYPE("50141", "Error getting entity types");
+
     private String code;
     private String message;
 

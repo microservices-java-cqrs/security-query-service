@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @Setter
-public class UserDto {
+public class UserWithRolesDto {
     private Long id;
-    private EntityDto entity;
     private String username;
-    private String status;
+    private List<RolDto> roles;
 }

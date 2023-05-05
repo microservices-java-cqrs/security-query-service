@@ -5,7 +5,7 @@ import com.freetech.sample.securityqueryservice.application.exceptions.Bussiness
 import com.freetech.sample.securityqueryservice.infraestructure.ports.in.MessageBrokerPort;
 import com.freetech.sample.securityqueryservice.infraestructure.ports.out.EntityRepository;
 import interfaces.UseCase;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 public class MessageBrokerUseCase implements MessageBrokerPort {
     private final EntityRepository entityRepository;
 
-    @Transactional
+    //@Transactional
     @Override
     public <T> T create(String tableName, T entity) {
         try {
@@ -23,7 +23,7 @@ public class MessageBrokerUseCase implements MessageBrokerPort {
             throw new BussinessException(
                     ExceptionEnum.ERROR_CREATE.getCode(),
                     ExceptionEnum.ERROR_CREATE.getMessage() + tableName,
-                    ex.getMessage() + " --> " + ex.getCause().getMessage(),
+                    ex.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
@@ -37,7 +37,7 @@ public class MessageBrokerUseCase implements MessageBrokerPort {
             throw new BussinessException(
                     ExceptionEnum.ERROR_UPDATE.getCode(),
                     ExceptionEnum.ERROR_UPDATE.getMessage() + tableName,
-                    ex.getMessage() + " --> " + ex.getCause().getMessage(),
+                    ex.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
@@ -51,7 +51,7 @@ public class MessageBrokerUseCase implements MessageBrokerPort {
             throw new BussinessException(
                     ExceptionEnum.ERROR_DELETE.getCode(),
                     ExceptionEnum.ERROR_DELETE.getMessage() + tableName,
-                    ex.getMessage() + " --> " + ex.getCause().getMessage(),
+                    ex.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
         }

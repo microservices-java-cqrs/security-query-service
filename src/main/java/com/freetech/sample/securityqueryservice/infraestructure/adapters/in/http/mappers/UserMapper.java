@@ -1,7 +1,7 @@
 package com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.mappers;
 
-import com.freetech.sample.securityqueryservice.domain.User;
-import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.dtos.UserDto;
+import com.freetech.sample.securityqueryservice.domain.model.User;
+import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.dtos.*;
 import pagination.ResultQuery;
 
 import java.util.List;
@@ -32,13 +32,30 @@ public class UserMapper {
             try {
                 var dto = clazz.getDeclaredConstructor().newInstance();
                 if (dto instanceof UserDto) {
-                    ((UserDto) dto).setId(user.getId());
-                    ((UserDto) dto).setEntityNumberDocument(user.getEntityNumberDocument());
-                    ((UserDto) dto).setEntityBussinessName(user.getEntityBussinessName());
-                    ((UserDto) dto).setEntityName(user.getEntityName());
-                    ((UserDto) dto).setEntityLastname(user.getEntityLastname());
-                    ((UserDto) dto).setUsername(user.getUsername());
-                    ((UserDto) dto).setStatus(user.getStatus());
+                    var objDto = ((UserDto) dto);
+                    objDto.setId(user.getId());
+                    objDto.setUsername(user.getUsername());
+                    objDto.setStatus(user.getStatus());
+                    if (user.getEntity() != null) {
+                        objDto.setEntity(new EntityDto());
+                        objDto.getEntity().setId(user.getEntity().getId());
+                        objDto.getEntity().setNumberDocument(user.getEntity().getNumberDocument());
+                        objDto.getEntity().setBussinessName(user.getEntity().getBussinessName());
+                        objDto.getEntity().setName(user.getEntity().getName());
+                        objDto.getEntity().setLastname(user.getEntity().getLastname());
+
+                        if (user.getEntity().getEntityType() != null) {
+                            objDto.getEntity().setEntityType(new EntityTypeDto());
+                            objDto.getEntity().getEntityType().setId(user.getEntity().getEntityType().getId());
+                            objDto.getEntity().getEntityType().setName(user.getEntity().getEntityType().getName());
+                        }
+                    }
+                } else if (dto instanceof UserWithRolesDto) {
+                    ((UserWithRolesDto) dto).setId(user.getId());
+                    ((UserWithRolesDto) dto).setUsername(user.getUsername());
+                    if (user.getRoles() != null) {
+                        ((UserWithRolesDto) dto).setRoles(RolMapper.toDto(user.getRoles(), RolDto.class));
+                    }
                 }
 
                 return dto;

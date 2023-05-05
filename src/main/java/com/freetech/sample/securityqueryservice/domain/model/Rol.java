@@ -1,15 +1,15 @@
-package com.freetech.sample.securityqueryservice.domain;
+package com.freetech.sample.securityqueryservice.domain.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@Builder
 @Getter
 @NoArgsConstructor
 @Setter
-public class EntityType {
+public class Rol {
     private Long id;
     private String name;
     private String description;
