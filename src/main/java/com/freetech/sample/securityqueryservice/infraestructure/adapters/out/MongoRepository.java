@@ -2,7 +2,6 @@ package com.freetech.sample.securityqueryservice.infraestructure.adapters.out;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.freetech.sample.securityqueryservice.application.mappers.*;
-import com.freetech.sample.securityqueryservice.domain.model.*;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.out.documents.EntityDocument;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.out.documents.EntityTypeDocument;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.out.documents.UserDocument;
@@ -17,7 +16,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import utils.JsonUtil;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class MongoRepository implements EntityRepository {
 
     @Override
     public <T> T update(String tableName, T entity) {
-        return mongoTemplate.save(entity, tableName);
+        return mongoTemplate.save(transformToDocument(entity), tableName);
     }
 
     public <K, T> T getById(K id, Class<T> clazz) {

@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 public class MessageBrokerUseCase implements MessageBrokerPort {
     private final EntityRepository entityRepository;
 
-    //@Transactional
     @Override
     public <T> T create(String tableName, T entity) {
         try {

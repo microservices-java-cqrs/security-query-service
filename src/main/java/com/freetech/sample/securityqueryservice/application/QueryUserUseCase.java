@@ -22,8 +22,15 @@ public class QueryUserUseCase implements QueryUserPort {
 
     @Override
     public User getById(Long id) {
+        var userDocument = userRepository.getById(id);
+        if (userDocument == null)
+            throw new BussinessException(
+                    ExceptionEnum.ERROR_NOT_FOUND_USER.getCode(),
+                    ExceptionEnum.ERROR_NOT_FOUND_USER.getMessage(),
+                    ExceptionEnum.ERROR_NOT_FOUND_USER.getMessage(),
+                    HttpStatus.NOT_FOUND);
+
         try {
-            var userDocument = userRepository.getById(id);
             return UserDocumentMapper.toDomain(userDocument);
         } catch (Exception ex) {
             throw new BussinessException(

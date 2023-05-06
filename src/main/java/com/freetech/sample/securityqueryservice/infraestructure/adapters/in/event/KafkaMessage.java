@@ -41,6 +41,8 @@ public class KafkaMessage {
                 messageBrokerPort.create(messagePersistence.getTableName(), persistenceObject);
             } else if (messagePersistence.getOperation() == OperationEnum.UPDATE.getValue()) {
                 messageBrokerPort.update(messagePersistence.getTableName(), persistenceObject);
+            } else if (messagePersistence.getOperation() == OperationEnum.DELETE.getValue()) {
+                messageBrokerPort.delete(messagePersistence.getTableName(), persistenceObject);
             }
         }
     }

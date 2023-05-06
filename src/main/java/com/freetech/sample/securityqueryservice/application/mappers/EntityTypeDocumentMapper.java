@@ -1,9 +1,7 @@
 package com.freetech.sample.securityqueryservice.application.mappers;
 
 import com.freetech.sample.securityqueryservice.domain.model.EntityType;
-import com.freetech.sample.securityqueryservice.domain.model.User;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.out.documents.EntityTypeDocument;
-import com.freetech.sample.securityqueryservice.infraestructure.adapters.out.documents.UserDocument;
 import messages.EntityTypeMessage;
 
 import java.util.List;
