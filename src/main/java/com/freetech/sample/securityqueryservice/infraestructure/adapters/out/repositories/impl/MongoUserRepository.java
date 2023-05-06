@@ -76,7 +76,7 @@ public class MongoUserRepository implements UserRepository {
             mql.append("{ $count: 'total'}");
         } else {
             if (userFilter.getPageNumber() != null && userFilter.getPageSize() != null) {
-                mql.append("{ $skip: ").append((userFilter.getPageNumber()-1)*userFilter.getPageSize()).append(" }");
+                mql.append("{ $skip: ").append((userFilter.getPageNumber()-1)*userFilter.getPageSize()).append(" }, ");
                 mql.append("{ $limit: ").append(userFilter.getPageSize()).append(" }");
             }
         }

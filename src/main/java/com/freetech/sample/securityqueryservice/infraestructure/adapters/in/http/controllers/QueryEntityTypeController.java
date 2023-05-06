@@ -1,7 +1,6 @@
 package com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.controllers;
 
 import com.freetech.sample.securityqueryservice.domain.filters.EntityTypeFilter;
-import com.freetech.sample.securityqueryservice.domain.filters.GetAllEntityTypeQuery;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.dtos.EntityTypeDto;
 import com.freetech.sample.securityqueryservice.infraestructure.adapters.in.http.mappers.EntityTypeMapper;
 import com.freetech.sample.securityqueryservice.infraestructure.ports.in.QueryEntityTypePort;

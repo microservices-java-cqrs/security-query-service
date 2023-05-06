@@ -1,7 +1,6 @@
 package com.freetech.sample.securityqueryservice.infraestructure.adapters.in.event;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.freetech.sample.securityqueryservice.domain.model.*;
 import com.freetech.sample.securityqueryservice.infraestructure.ports.in.*;
 import enums.OperationEnum;
 import enums.TableEnum;
@@ -35,11 +34,13 @@ public class KafkaMessage {
             } else if (messagePersistence.getTableName().equals(TableEnum.ROLES.getValue())) {
                 persistenceObject = JsonUtil.convertToObject(JsonUtil.convertoToJson(messagePersistence.getMessage()), RolMessage.class);
             } else if (messagePersistence.getTableName().equals(TableEnum.USERS_ROLES.getValue())) {
-                persistenceObject = JsonUtil.convertToObject(JsonUtil.convertoToJson(messagePersistence.getMessage()), UserRol.class);
+                persistenceObject = JsonUtil.convertToObject(JsonUtil.convertoToJson(messagePersistence.getMessage()), UserRolMessage.class);
             }
 
             if (messagePersistence.getOperation() == OperationEnum.CREATE.getValue()) {
                 messageBrokerPort.create(messagePersistence.getTableName(), persistenceObject);
+            } else if (messagePersistence.getOperation() == OperationEnum.UPDATE.getValue()) {
+                messageBrokerPort.update(messagePersistence.getTableName(), persistenceObject);
             }
         }
     }

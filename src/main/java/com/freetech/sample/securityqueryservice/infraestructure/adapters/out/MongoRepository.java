@@ -10,10 +10,7 @@ import com.freetech.sample.securityqueryservice.infraestructure.ports.out.Entity
 import enums.StateEnum;
 import interfaces.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
-import messages.EntityMessage;
-import messages.EntityTypeMessage;
-import messages.RolMessage;
-import messages.UserMessage;
+import messages.*;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -100,8 +97,8 @@ public class MongoRepository implements EntityRepository {
             ((UserDocument) document).getEntityDocument().setId(user.getEntityId());
         } else if(entity instanceof RolMessage){
             document = RolDocumentMapper.toDocument((RolMessage) entity);
-        } else if(entity instanceof UserRol) {
-            document = UserRolDocumentMapper.toDocument((UserRol) entity);
+        } else if(entity instanceof UserRolMessage) {
+            document = UserRolDocumentMapper.toDocument((UserRolMessage) entity);
         }
         return (K) document;
     }
